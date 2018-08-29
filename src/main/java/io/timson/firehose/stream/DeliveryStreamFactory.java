@@ -9,8 +9,10 @@ import io.timson.firehose.request.S3DeliveryStreamConfig;
         import io.timson.firehose.stream.S3DeliveryStream.S3DeliveryStreamBuilder;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 public class DeliveryStreamFactory {
+    private static final Logger logger = Logger.getLogger(DeliveryStreamFactory.class.getName());
 
     private final S3Client s3Client;
     private final JestClient jestClient;
@@ -32,6 +34,7 @@ public class DeliveryStreamFactory {
     }
 
     private S3DeliveryStream s3DeliveryStream(String streamName, S3DeliveryStreamConfig request) {
+        logger.info("Creating S3 delivery stream with name: " + streamName);
         return new S3DeliveryStreamBuilder()
                 .withName(streamName)
                 .withS3Client(s3Client)
@@ -44,6 +47,7 @@ public class DeliveryStreamFactory {
     }
 
     private ElasticsearchDeliveryStream elasticsearchDeliveryStream(String streamName, ElasticsearchDeliveryStreamConfig request) {
+        logger.info("Creating ES delivery stream with name: " + streamName);
         return new ElasticsearchDeliveryStream.ElasticsearchDeliveryStreamBuilder()
                 .withStreamName(streamName)
                 .withIndexName(request.getIndexName())

@@ -18,11 +18,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class FirehoseMock {
-
     private final Server server;
-
     private final Integer port;
-
     private final DeliveryStreamService deliveryStreamService;
 
 

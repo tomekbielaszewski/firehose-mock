@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
 
 
 public class RootServlet extends HttpServlet {
+    private static final Logger logger = Logger.getLogger(RootServlet.class.getName());
 
     private final RequestHandler requestHandler;
 
@@ -23,6 +25,7 @@ public class RootServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         final String amzTarget = extractAmzTarget(request);
+        logger.info("Handling request with target: " + amzTarget);
 
         switch (amzTarget) {
             case "PutRecord":
